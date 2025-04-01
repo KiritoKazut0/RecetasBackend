@@ -1,7 +1,7 @@
 import sequelize_conexion from "../config/databaseConection";
 import IPreparacion from "../interfaces/models/IPreparacion";
 import { DataTypes, Model } from "sequelize";
-import RecetasModel from "./Recetas";
+import RecetasModel from "./RecetasModel";
 
 
 class PreparacionModel extends Model <IPreparacion> implements IPreparacion {
