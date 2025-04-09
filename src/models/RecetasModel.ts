@@ -1,10 +1,12 @@
 import sequelize_conexion from "../config/databaseConection";
 import IReceta from "../interfaces/models/IRecetasModel";
 import { DataTypes, Model } from "sequelize";
-
-
+import IngredientesModel from "./IngredientesModel";
+import PreparacionModel from "./PreparacionModel";
+import UserModel from "./UserModel";
 class RecetasModel extends Model <IReceta> implements IReceta {
     id?: string | undefined;
+    user_id!: string;
     nombre!: string;
     descripcion!: string;
     tiempoCoccion!: string;
@@ -12,6 +14,9 @@ class RecetasModel extends Model <IReceta> implements IReceta {
     porciones!: string;
     categoria!: string;
     imagen!: string;
+      // Relaciones para TypeScript
+  ingredientes?: IngredientesModel[];
+  preparacions?: PreparacionModel[];
 }
 
 RecetasModel.init({
@@ -21,6 +26,15 @@ RecetasModel.init({
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
+
+    user_id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: UserModel,
+          key: 'id',
+        }
+      },
 
     nombre: {
         type: DataTypes.STRING(),
@@ -59,6 +73,8 @@ RecetasModel.init({
     tableName: "recetas",
     timestamps: false,
     sequelize: sequelize_conexion
-})
+});
+
+
 
 export default RecetasModel

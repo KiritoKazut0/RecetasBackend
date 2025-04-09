@@ -8,7 +8,7 @@ class UserModel extends Model<IUserModels> implements IUserModels {
     nombre!: string;
     correo!: string;
     contraseña!: string;
-   tipo_suscripcion?: "Basico" | "Premium" | undefined;
+   tipo_suscripcion!: "Basico" | "Premium";
 }
 
 UserModel.init({
