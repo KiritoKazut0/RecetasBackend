@@ -15,7 +15,7 @@ export const createSession = async (req: Request, res: Response) => {
 
         const price = await stripe.prices.retrieve(idSuscriptionProduct);
         const product = await stripe.products.retrieve(price.product as string);
-
+        const url = process.env.URL as string;
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -26,8 +26,8 @@ export const createSession = async (req: Request, res: Response) => {
                     quantity: 1
                 }
             ],
-            success_url: `http://localhost:3000/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: "http://localhost:3000/payment/cancel",
+            success_url: `${url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${url}/payment/cancel`,
             metadata: {
                 id_user
             }
