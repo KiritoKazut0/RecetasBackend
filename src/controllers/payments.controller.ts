@@ -26,8 +26,8 @@ export const createSession = async (req: Request, res: Response) => {
                     quantity: 1
                 }
             ],
-            success_url: `https://ghr6wb8p-3000.usw3.devtunnels.ms/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: "https://ghr6wb8p-3000.usw3.devtunnels.ms/payment/cancel",
+            success_url: `http://localhost:3000/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: "http://localhost:3000/payment/cancel",
             metadata: {
                 id_user
             }
