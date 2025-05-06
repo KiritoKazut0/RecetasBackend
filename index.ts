@@ -9,13 +9,29 @@ import PreparacionModel from './src/models/PreparacionModel'
 import UserModel from './src/models/UserModel'
 import userRoutes from './src/routes/users.route'
 import recetasRoutes from "./src/routes/recetas.route"
+import paymentRoute from "./src/routes/payments.route"
+import {engine} from "express-handlebars"
+import path from "path"
+
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] || '3000');
+
+app.use('/payment/webhook', express.raw({type: 'application/json'}));
+
 app.use(express.json());
+app.use(express.static(path.resolve("./src/public")));
 app.use(morgan('dev'));
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.resolve('./src/views'));
+
 app.use('/users', userRoutes);
 app.use('/recetas', recetasRoutes);
+app.use('/payment', paymentRoute);
+
+
 
 app.use(cors({
     origin: "*"
@@ -79,7 +95,8 @@ UserModel.hasMany(RecetasModel, {
 
 
 app.listen(PORT, async () => {
-    await conectDatabase()
+    console.clear();
+    await conectDatabase();
     console.log('Server Listening on port', PORT);
 
 })

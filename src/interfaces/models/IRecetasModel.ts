@@ -11,7 +11,7 @@ export default interface IReceta {
   porciones: string;
   categoria: string;
   imagen: string;
-
+  tipo_suscripcion: 'Basico' | 'Premium'
   ingredientes?: IIngrediente[];
   preparacions?: IPreparacion[];
 }

@@ -14,6 +14,7 @@ class RecetasModel extends Model <IReceta> implements IReceta {
     porciones!: string;
     categoria!: string;
     imagen!: string;
+    tipo_suscripcion!: "Basico" | "Premium";
       // Relaciones para TypeScript
   ingredientes?: IngredientesModel[];
   preparacions?: PreparacionModel[];
@@ -34,6 +35,12 @@ RecetasModel.init({
           model: UserModel,
           key: 'id',
         }
+      },
+
+      tipo_suscripcion: {
+        type: DataTypes.ENUM('Basico', 'Premium'),
+        allowNull: false,
+    
       },
 
     nombre: {

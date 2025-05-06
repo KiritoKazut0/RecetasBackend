@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suscripción Activada Correctamente</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
+            <!-- Círculo con ícono de verificación -->
+            <div class="flex justify-center mb-6">
+                <div class="bg-green-100 rounded-full p-4">
+                    <div class="bg-green-500 rounded-full p-3">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mensaje de confirmación -->
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-2">¡Suscripción Activada!</h1>
+            <p class="text-gray-600 text-center mb-6">Tu suscripción ha sido activada con éxito. Gracias por confiar en nosotros.</p>
+            
+            <!-- Detalles de la suscripción -->
+            <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                <h2 class="text-lg font-semibold text-blue-800 mb-2">Detalles de tu plan</h2>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-700">Plan:</span>
+                    <span class="font-medium">{{plan}}</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-700">Período:</span>
+                    <span class="font-medium">{{period}}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-700">Próxima renovación:</span>
+                    <span class="font-medium">{{nextRenewal}}</span>
+                </div>
+            </div>
+            
+            <!-- Detalles del pago -->
+            <div class="border-t border-b border-gray-200 py-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">ID de Transacción:</span>
+                    <span class="font-medium">{{transactionId}}</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Fecha:</span>
+                    <span class="font-medium">{{transactionDate}}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Método de pago:</span>
+                    <span class="font-medium">Tarjeta terminada en *{{paymentMethod}}</span>
+                </div>
+            </div>
+            
+            <!-- Ayuda y contacto -->
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p>¿Tienes alguna pregunta? <a href="#" class="text-blue-600 hover:underline">Contáctanos</a></p>
+                <p class="mt-2">Consulta nuestra <a href="#" class="text-blue-600 hover:underline">guía del usuario</a> para aprovechar al máximo tu suscripción</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animación de confeti -->
+    <script>
+        // Función simple para crear efecto de confeti
+        document.addEventListener('DOMContentLoaded', function() {
+            createConfetti();
+        });
+
+        function createConfetti() {
+            const confettiCount = 100;
+            const container = document.body;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -20 + 'px';
+                confetti.style.zIndex = '-1';
+                confetti.style.borderRadius = '50%';
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                
+                container.appendChild(confetti);
+                
+                // Animación de caída
+                const duration = Math.random() * 3 + 2;
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0)', opacity: 1 },
+                    { transform: 'translateY(' + window.innerHeight + 'px) rotate(720deg)', opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'cubic-bezier(.55,.06,.68,.19)',
+                    fill: 'forwards'
+                });
+                
+                // Remover el confeti después de la animación
+                setTimeout(() => {
+                    confetti.remove();
+                }, duration * 1000);
+            }
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d8', '#f9ca24', '#7bed9f', '#70a1ff'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>

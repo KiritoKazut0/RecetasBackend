@@ -8,12 +8,14 @@ services:
     env_file: ./.env
     ports:
       - "3000:3000"
+    restart: always
     depends_on:
       - db  
     command: ["wait-for-it", "db:3306", "--", "npm", "start"]
 
   db:
     image: mysql:8
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: admin  
       MYSQL_DATABASE: RecetasApp  

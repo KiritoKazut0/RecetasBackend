@@ -9,6 +9,7 @@ class UserModel extends Model<IUserModels> implements IUserModels {
     correo!: string;
     contraseña!: string;
    tipo_suscripcion!: "Basico" | "Premium";
+   id_suscripcion?: string | undefined;
 }
 
 UserModel.init({
@@ -35,6 +36,10 @@ UserModel.init({
         type: DataTypes.ENUM("Basico", "Premium"),
         defaultValue: "Basico",
         allowNull: false
+    },
+    id_suscripcion: {
+        type: DataTypes.STRING(),
+        allowNull: true
     }
 },{
     tableName: "users",

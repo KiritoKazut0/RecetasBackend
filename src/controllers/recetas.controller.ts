@@ -50,11 +50,13 @@ export const crearReceta = async (req: Request, res: Response) => {
         tiempoCoccion,
         porciones,
         categoria,
-        imagen
+        imagen,
+        tipo_suscripcion
       } = req.body;
   
       const receta = await RecetasModel.create({
         nombre,
+        tipo_suscripcion,
         descripcion,
         tiempoPreparacion,
         tiempoCoccion,
@@ -95,7 +97,7 @@ async function obtenerRecetasSegunSuscripcion(tipo_suscripcion: string): Promise
     try {
         const whereCondition = tipo_suscripcion === "Premium"
             ? {} // Todas las recetas
-            : { categoria: "Basico" }; // Solo recetas básicas
+            : { tipo_suscripcion: "Basico" }; // Solo recetas básicas
 
         const recetas = await RecetasModel.findAll({
             where: whereCondition,

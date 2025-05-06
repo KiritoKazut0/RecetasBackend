@@ -11,7 +11,8 @@ const validateFieldRecets = (req: Request, res: Response, next: NextFunction) =>
     tiempoCoccion,
     porciones,
     categoria,
-    imagen
+    imagen,
+    tipo_suscripcion
   } = req.body;
 
   const missingFields: string[] = [];
@@ -25,6 +26,7 @@ const validateFieldRecets = (req: Request, res: Response, next: NextFunction) =>
   if (!porciones) missingFields.push("porciones");
   if (!categoria) missingFields.push("categoria");
   if (!imagen) missingFields.push("imagen");
+  if(!tipo_suscripcion) missingFields.push("tipo_suscripcion")
 
   if (missingFields.length > 0) {
     return res.status(400).json({
